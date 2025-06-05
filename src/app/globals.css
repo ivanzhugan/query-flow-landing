@@ -67,9 +67,8 @@ body {
   width: 400px;
   height: 400px;
   background: var(--gradient-3);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: calc(50% - 200px);
+  left: calc(50% - 200px);
   animation-delay: 10s;
 }
 
@@ -78,6 +77,13 @@ body {
   25% { transform: translate(50px, -50px) scale(1.1); }
   50% { transform: translate(-50px, 50px) scale(0.9); }
   75% { transform: translate(30px, 30px) scale(1.05); }
+}
+
+/* Safari-specific fix */
+@supports (-webkit-appearance: none) {
+  .orb3 {
+    will-change: transform;
+  }
 }
 
 @keyframes fadeInUp {
@@ -918,7 +924,7 @@ body {
 
 /* Tooltip */
 .tooltip {
-  position: absolute;
+  position: fixed;
   background: var(--primary);
   color: white;
   padding: 1rem 1.5rem;

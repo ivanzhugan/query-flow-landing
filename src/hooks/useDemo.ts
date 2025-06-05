@@ -35,13 +35,14 @@ export const useDemo = () => {
     tooltip.classList.add('show')
     tooltip.classList.remove('tooltip-left', 'tooltip-top')
     
+    // Use viewport coordinates since tooltip is position: fixed
     if (position === 'top') {
-      tooltip.style.left = rect.left + rect.width / 2 - 140 + 'px'
-      tooltip.style.top = rect.top - 70 + 'px'
+      tooltip.style.left = Math.max(10, rect.left + rect.width / 2 - 140) + 'px'
+      tooltip.style.top = Math.max(10, rect.top + window.scrollY - 70) + 'px'
       tooltip.classList.add('tooltip-top')
     } else if (position === 'left') {
-      tooltip.style.left = rect.left - 300 + 'px'
-      tooltip.style.top = rect.top + rect.height / 2 - 30 + 'px'
+      tooltip.style.left = Math.max(10, rect.left - 300) + 'px'
+      tooltip.style.top = Math.max(10, rect.top + window.scrollY + rect.height / 2 - 30) + 'px'
       tooltip.classList.add('tooltip-left')
     }
   }, [])
