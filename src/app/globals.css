@@ -922,55 +922,6 @@ body {
   }
 }
 
-/* Tooltip */
-.tooltip {
-  position: fixed;
-  background: var(--primary);
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  z-index: 1001;
-  max-width: 280px;
-}
-
-.tooltip.show {
-  opacity: 1;
-}
-
-.tooltip::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 8px 8px 0 8px;
-  border-color: var(--primary) transparent transparent transparent;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.tooltip.tooltip-left::after {
-  bottom: auto;
-  left: auto;
-  right: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-width: 8px 0 8px 8px;
-  border-color: transparent transparent transparent var(--primary);
-}
-
-.tooltip.tooltip-top::after {
-  bottom: -8px;
-  border-width: 8px 8px 0 8px;
-  border-color: var(--primary) transparent transparent transparent;
-}
 
 /* Demo controls */
 .demo-controls {

@@ -2,57 +2,9 @@ import { useState, useCallback, useRef } from 'react'
 
 export type DemoStep = 0 | 1 | 2 | 3 | 4
 
-export interface TooltipState {
-  show: boolean
-  text: string
-  position: 'top' | 'left'
-  element?: HTMLElement | null
-}
-
 export const useDemo = () => {
   const [demoStep, setDemoStep] = useState<DemoStep>(0)
-  const [tooltip, setTooltip] = useState<TooltipState>({
-    show: false,
-    text: '',
-    position: 'top'
-  })
-  
-  const tooltipRef = useRef<HTMLDivElement>(null)
 
-  const showTooltip = useCallback((element: HTMLElement, text: string, position: 'top' | 'left' = 'top') => {
-    if (!tooltipRef.current) return
-    
-    const rect = element.getBoundingClientRect()
-    const tooltip = tooltipRef.current
-    
-    setTooltip({
-      show: true,
-      text,
-      position,
-      element
-    })
-    
-    tooltip.classList.add('show')
-    tooltip.classList.remove('tooltip-left', 'tooltip-top')
-    
-    // Use viewport coordinates since tooltip is position: fixed
-    if (position === 'top') {
-      tooltip.style.left = Math.max(10, rect.left + rect.width / 2 - 140) + 'px'
-      tooltip.style.top = Math.max(10, rect.top + window.scrollY - 70) + 'px'
-      tooltip.classList.add('tooltip-top')
-    } else if (position === 'left') {
-      tooltip.style.left = Math.max(10, rect.left - 300) + 'px'
-      tooltip.style.top = Math.max(10, rect.top + window.scrollY + rect.height / 2 - 30) + 'px'
-      tooltip.classList.add('tooltip-left')
-    }
-  }, [])
-
-  const hideTooltip = useCallback(() => {
-    if (tooltipRef.current) {
-      tooltipRef.current.classList.remove('show')
-    }
-    setTooltip(prev => ({ ...prev, show: false }))
-  }, [])
 
   const removeAllHighlights = useCallback(() => {
     document.querySelectorAll('.highlight-ring').forEach(el => {
@@ -80,9 +32,8 @@ export const useDemo = () => {
   const resetDemo = useCallback(() => {
     setDemoStep(0)
     removeAllHighlights()
-    hideTooltip()
     updateStepIndicators(0)
-  }, [removeAllHighlights, hideTooltip, updateStepIndicators])
+  }, [removeAllHighlights, updateStepIndicators])
 
   const startDemo = useCallback(() => {
     setDemoStep(1)
@@ -100,16 +51,11 @@ export const useDemo = () => {
 
   const completeDemo = useCallback(() => {
     removeAllHighlights()
-    hideTooltip()
     updateStepIndicators(5 as DemoStep)
-  }, [removeAllHighlights, hideTooltip, updateStepIndicators])
+  }, [removeAllHighlights, updateStepIndicators])
 
   return {
     demoStep,
-    tooltip,
-    tooltipRef,
-    showTooltip,
-    hideTooltip,
     removeAllHighlights,
     updateStepIndicators,
     resetDemo,

@@ -31,10 +31,6 @@ const sqlQuery = `<span class="sql-keyword">WITH</span> monthly_revenue <span cl
 export default function InteractiveDemo() {
   const {
     demoStep,
-    tooltip,
-    tooltipRef,
-    showTooltip,
-    hideTooltip,
     resetDemo,
     startDemo,
     nextStep,
@@ -64,50 +60,36 @@ export default function InteractiveDemo() {
           setAiInput("Show me monthly revenue trends with customer count and growth rate")
           if (aiInputContainerRef.current) {
             aiInputContainerRef.current.classList.add('highlight-ring')
-            if (sendButtonRef.current) {
-              showTooltip(sendButtonRef.current, "Type your question and click Send - try it now! 👇", 'left')
-            }
           }
           break
           
         case 2:
           // Step 2: Show AI response
-          hideTooltip()
           setShowAiResponse(true)
           setTimeout(() => {
             setShowApplyButton(true)
             if (applyButtonRef.current) {
               applyButtonRef.current.classList.add('highlight-ring')
-              showTooltip(applyButtonRef.current, "Your SQL is ready! Click to add it to your notebook 📝", 'left')
             }
           }, 500)
           break
           
         case 3:
           // Step 3: Apply SQL to cell
-          hideTooltip()
           setSqlContent(sqlQuery)
           setTimeout(() => {
             if (runButtonRef.current) {
               runButtonRef.current.classList.add('highlight-ring')
-              showTooltip(runButtonRef.current, "Perfect! Now run your query to see the results 🚀", 'left')
             }
           }, 500)
           break
           
         case 4:
           // Step 4: Show results
-          hideTooltip()
           setShowResults(true)
           setTimeout(() => {
             setIsCompleted(true)
             completeDemo()
-            if (dataResultsRef.current) {
-              showTooltip(dataResultsRef.current, "Boom! 💥 Your data is ready. That took less than 10 seconds!", 'top')
-              setTimeout(() => {
-                hideTooltip()
-              }, 3000)
-            }
           }, 500)
           break
       }
@@ -116,7 +98,7 @@ export default function InteractiveDemo() {
     if (demoStep > 0) {
       runDemoStep()
     }
-  }, [demoStep, showTooltip, hideTooltip, completeDemo])
+  }, [demoStep, completeDemo])
 
   const handleStartDemo = () => {
     startDemo()
@@ -325,11 +307,6 @@ export default function InteractiveDemo() {
             Skip Tutorial
           </button>
         </div>
-      </div>
-      
-      {/* Tooltip */}
-      <div ref={tooltipRef} className="tooltip">
-        {tooltip.text}
       </div>
     </>
   )
