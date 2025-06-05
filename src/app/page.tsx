@@ -1,6 +1,7 @@
 'use client'
 
 import Navigation from '@/components/Navigation'
+import DemoSection from '@/components/Demo/DemoSection'
 import Features from '@/components/Features'
 import Testimonial from '@/components/Testimonial'
 import Stats from '@/components/Stats'
@@ -60,19 +61,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Demo Section Placeholder */}
-      <section id="demo" style={{ 
-        padding: '6rem 2rem', 
-        textAlign: 'center', 
-        background: 'var(--dark-secondary)' 
-      }}>
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: '700' }}>
-          Interactive Demo Coming Soon
-        </h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem' }}>
-          Experience the magic of natural language to SQL conversion
-        </p>
-      </section>
+      <DemoSection />
 
       <Features />
       <Testimonial />
