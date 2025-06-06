@@ -6,8 +6,11 @@ import Features from '@/components/Features'
 import Testimonial from '@/components/Testimonial'
 import Stats from '@/components/Stats'
 import Footer from '@/components/Footer'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function Home() {
+  useScrollAnimation()
+
   return (
     <>
       <Navigation />
